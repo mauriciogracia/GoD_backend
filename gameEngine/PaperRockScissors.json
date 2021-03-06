@@ -1,0 +1,16 @@
+{
+    "rules": [
+      {
+        "move":"paper",
+        "beats":"rock"
+      },
+      {
+        "move":"rock",
+        "beats":"scissors"
+      },
+      {
+        "move":"scissors",
+        "beats":"paper"
+      }
+    ]
+  }
