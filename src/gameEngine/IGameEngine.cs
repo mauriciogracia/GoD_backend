@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 public interface IGameEngine {
     /// <summary>
-    /// Initializes the games engine loading the json file path
+    /// Returns the current gameSettings of the game
     /// </summary>
-    /// <param name="pathToJsonRules"></param>
-    /// <returns>True when the rules where loaded correctly</returns>
-    bool Init(String pathToJsonRules);
-
+    /// <returns></returns>
+    GameSettings getGameSettings();
     /// <summary>
     /// Gets the possible moves from the game engine
     /// </summary>
