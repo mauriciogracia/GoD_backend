@@ -34,6 +34,7 @@ public class MovementsGameEngine : IGameEngine {
     public int determinResult(String movePlayerOne, String movePlayerTwo) {
         int moveResult ;
 
+        //when no matching rule is found a TIE is assumed (i.e. rock vs rock)
         moveResult = 0 ;
 
         return moveResult ;
