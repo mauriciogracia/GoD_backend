@@ -8,12 +8,13 @@ namespace UnitTests
     public class UnitTestBackend
     {
         private IGameEngine aGameEngine ;
-        private string jsonRulesFile = "PaperRockScissors.json";
+        private GameEngineType currentGameEngine = GameEngineType.MoveGameEngine;
+        private string jsonRulesFile = Path.Combine(Program.BACKEND_FOLDER,"PaperRockScissors.json");
 
         [Fact]
         public void TestGameEngineInit_Fails()
         {
-            aGameEngine = new MoveGameEngine("INCORRECT_FILE.json");
+            aGameEngine = GameEngineFactory.Create(currentGameEngine,"INCORRECT_FILE.json");
             var gs = aGameEngine.getGameSettings();
 
             Assert.True((gs == null) || (gs.rules == null));
@@ -22,7 +23,7 @@ namespace UnitTests
         [Fact]
         public void TestGameEngineInit_Success()
         {
-            aGameEngine = new MoveGameEngine(Path.Combine(Program.BACKEND_FOLDER, jsonRulesFile));
+            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
             var gs = aGameEngine.getGameSettings();
 
             Assert.True((gs != null) && (gs.rules != null));              
@@ -31,7 +32,7 @@ namespace UnitTests
         [Fact]
         public void TestGameEngine_GetPossibleMoves()
         {
-            aGameEngine = new MoveGameEngine(Path.Combine(Program.BACKEND_FOLDER, jsonRulesFile));
+            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
             var lstMoves = aGameEngine.getPossibleMoves();
         }
     }
