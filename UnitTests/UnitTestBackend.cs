@@ -34,6 +34,17 @@ namespace UnitTests
         {
             aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
             var lstMoves = aGameEngine.getPossibleMoves();
+
+            Assert.NotNull(lstMoves);
+        }
+
+        [Fact]
+        public void TestGameEngine_Rules()
+        {
+            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+            int moveResult = aGameEngine.determinResult("paper", "rock");
+
+            Assert.Equal(1, moveResult);
         }
     }
 }
