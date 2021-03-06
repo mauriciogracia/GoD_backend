@@ -7,13 +7,13 @@ public interface IGameEngine {
     /// </summary>
     /// <param name="pathToJsonRules"></param>
     /// <returns>True when the rules where loaded correctly</returns>
-    public bool Init(String pathToJsonRules);
+    bool Init(String pathToJsonRules);
 
     /// <summary>
     /// Gets the possible moves from the game engine
     /// </summary>
     /// <returns>A list of posible moves for the game</returns>
-    public List<String> getPossibleMoves() ;
+    List<String> getPossibleMoves() ;
 
     /// <summary>
     /// This metod should return
@@ -25,5 +25,5 @@ public interface IGameEngine {
     /// <param name="movePlayerOne">Move made by player one</param>
     /// <param name="movePlayerTwo">Move made by player two</param>
     /// <returns></returns>
-    public int determinResult(String movePlayerOne, String movePlayerTwo) ;
+    int determinResult(String movePlayerOne, String movePlayerTwo) ;
 }
