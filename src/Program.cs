@@ -7,7 +7,7 @@ namespace GoD_backend
 {
     public class Program
     {
-        //TODO: change this to "getCurrentDirectry" and rest of the path
+        //TODO: change this to some logic or to json settings
         public static string BACKEND_FOLDER = @"D:\MAO\repos\GoD_backend\src\gameEngine\" ;
         public static void Main(string[] args)
         {
@@ -16,7 +16,7 @@ namespace GoD_backend
 
             filePath = Path.Combine(BACKEND_FOLDER, "PaperRockScissors.json");
 
-            mge = new MoveGameEngine(filePath);
+            mge = GameEngineFactory.Create(GameEngineType.MoveGameEngine, filePath);
 
             CreateHostBuilder(args).Build().Run();
         }

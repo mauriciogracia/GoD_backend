@@ -1,8 +1,8 @@
 using System ;
 
-public class GameEngineFactory
+public static class GameEngineFactory
 {
-    public IGameEngine Create(GameEngineType gameEngineType, string configFile)
+    public static IGameEngine Create(GameEngineType gameEngineType, string configFile)
     {
         switch(gameEngineType)
         {
@@ -10,7 +10,7 @@ public class GameEngineFactory
                 return new MoveGameEngine(configFile);
             /*    
             case GameEngineType.AnotherGameEngine:
-                return new Motorbike();
+                return new AnotherGameEngine();
             */
             default:
                 throw new NotImplementedException();

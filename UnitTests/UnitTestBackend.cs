@@ -5,7 +5,7 @@ using Xunit;
 
 namespace UnitTests
 {
-    public class UnitTestBackend
+    public class UnitTestGameEngine
     {
         private IGameEngine aGameEngine ;
         private GameEngineType currentGameEngine = GameEngineType.MoveGameEngine;
@@ -41,10 +41,44 @@ namespace UnitTests
         [Fact]
         public void TestGameEngine_Rules()
         {
+            int moveResult;
             aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
-            int moveResult = aGameEngine.determinResult("paper", "rock");
 
+            moveResult = aGameEngine.determinResult("paper", "rock");
             Assert.Equal(1, moveResult);
+
+            moveResult = aGameEngine.determinResult("rock", "scissors");
+            Assert.Equal(1, moveResult);
+
+            moveResult = aGameEngine.determinResult("scissors", "paper");
+            Assert.Equal(1, moveResult);
+
+            moveResult = aGameEngine.determinResult("rock", "paper");
+            Assert.Equal(-1, moveResult);
+
+            moveResult = aGameEngine.determinResult("scissors", "rock");
+            Assert.Equal(-1, moveResult);
+
+            moveResult = aGameEngine.determinResult("paper", "scissors");
+            Assert.Equal(-1, moveResult);
+
+            moveResult = aGameEngine.determinResult("paper", "scissors");
+            Assert.Equal(-1, moveResult);
+
+            moveResult = aGameEngine.determinResult("rock", "paper");
+            Assert.Equal(-1, moveResult);
+
+            moveResult = aGameEngine.determinResult("scissors", "rock");
+            Assert.Equal(-1, moveResult);
+
+            moveResult = aGameEngine.determinResult("paper", "paper");
+            Assert.Equal(0, moveResult);
+
+            moveResult = aGameEngine.determinResult("rock", "rock");
+            Assert.Equal(0, moveResult);
+
+            moveResult = aGameEngine.determinResult("scissors", "scissors");
+            Assert.Equal(0, moveResult);
         }
     }
 }
