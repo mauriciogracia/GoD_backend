@@ -7,6 +7,6 @@ namespace GoD_backend
 
         List<GameStats> GetAll();
 
-        void Clear() ;
+        bool Clear() ;
     }
 }

@@ -41,12 +41,31 @@ namespace GoD_backend
         }
 
         public List<GameStats> GetAll(){
-            return  _context.GameStatsItems.ToList<GameStats>() ;
+            List<GameStats> lstStats ;
+
+            try {
+                lstStats = _context.GameStatsItems.ToList<GameStats>() ;
+            } catch (Exception ex) {
+                CustomLogger.WriteLine(ex.Message) ;
+                lstStats = null ;
+            }
+
+            return lstStats ;
         }
 
-        public void Clear() {
-            _context.GameStatsItems.RemoveRange(_context.GameStatsItems) ;
-            _context.SaveChanges() ;
+        public bool Clear() {
+            bool success ;
+
+            try {
+                _context.GameStatsItems.RemoveRange(_context.GameStatsItems) ;
+                _context.SaveChanges() ;
+                success = true ;
+            } catch (Exception ex) {
+                CustomLogger.WriteLine(ex.Message) ;
+                success = false ;
+            }
+
+            return success ;
         }
     }
 }
