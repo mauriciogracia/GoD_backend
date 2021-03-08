@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GoD_backend.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    //[ApiController]
     public class GameController : ControllerBase
     {
         private readonly GameStatsRepository gameStatsRepo ;
@@ -21,9 +21,10 @@ namespace GoD_backend.Controllers
             return GameSettings.currentGameEngine.getPossibleMoves();
         }
 
-        [HttpGet("DetermineResult")]
-        public int DetermineResult(string movePlayerOne, string movePlayerTwo)
+        [HttpPost("DetermineResult/{movePlayerOne}/{movePlayerTwo}")]
+        public int DetermineResult([FromRoute]string movePlayerOne, [FromRoute]string movePlayerTwo)
         {
+            // TODO return FAILUR when parameters dont match expected input
             return GameSettings.currentGameEngine.determineResult(movePlayerOne, movePlayerTwo) ;
         }
 
@@ -31,7 +32,6 @@ namespace GoD_backend.Controllers
         public IEnumerable<GameStats> GetGameStats()
         {
             return gameStatsRepo.GetAll();
-            //return await _context.GameStatsItems.ToListAsync();
         }
 
         [HttpPut]
