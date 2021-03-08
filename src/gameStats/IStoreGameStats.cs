@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 
-public interface IStoreGameStats {
-    bool Update(GameStats gs);
+namespace GoD_backend
+{
+    public interface IStoreGameStats {
+        bool Update(GameStats gs);
 
-    List<GameStats> GetAll();
+        List<GameStats> GetAll();
 
-    void Clear() ;
+        void Clear() ;
+    }
 }

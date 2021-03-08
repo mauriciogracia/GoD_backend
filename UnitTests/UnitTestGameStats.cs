@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using GoD_backend;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Xunit;
 
+
 public class UnitTestGameStats {
-
-
     private GameStatsRepository prepareStatsRepo() {
         GameStatsRepository repo ;
         GameStatsContext gameCtx ;
@@ -45,6 +45,26 @@ public class UnitTestGameStats {
         repo.Update(gs);
         lstStats = repo.GetAll() ;
 
-        Assert.True((lstStats != null) && (lstStats.Count == 1) && (lstStats[0].playerName == gs.playerName)) ;        
+        Assert.True((lstStats != null) && (lstStats.Count == 1) && (lstStats[0].playerName == gs.playerName) && (lstStats[0].gamesWon == gs.gamesWon)) ;        
+    }
+
+    [Fact]
+    public void GameStats_Updateingle() {
+        GameStatsRepository repo ;
+        List<GameStats> lstStats ;
+        GameStats gs ;
+
+        repo = prepareStatsRepo() ;
+
+
+        gs = new GameStats(name: "Pedro", games: 7) ;
+        repo.Update(gs);
+
+        gs = new GameStats(name: "pEdRo", games: 3) ;
+        repo.Update(gs);
+        
+        lstStats = repo.GetAll() ;
+
+        Assert.True((lstStats != null) && (lstStats.Count == 1) && (lstStats[0].playerName == "Pedro") && (lstStats[0].gamesWon == 10)) ;        
     }
 }

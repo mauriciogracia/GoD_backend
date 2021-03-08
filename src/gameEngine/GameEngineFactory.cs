@@ -1,19 +1,22 @@
 using System ;
 
-public static class GameEngineFactory
+namespace GoD_backend
 {
-    public static IGameEngine Create(GameEngineType gameEngineType, string configFile)
+    public static class GameEngineFactory
     {
-        switch(gameEngineType)
+        public static IGameEngine Create(GameEngineType gameEngineType, string configFile)
         {
-            case GameEngineType.MoveGameEngine:
-                return new MoveGameEngine(configFile);
-            /*    
-            case GameEngineType.AnotherGameEngine:
-                return new AnotherGameEngine();
-            */
-            default:
-                throw new NotImplementedException();
+            switch(gameEngineType)
+            {
+                case GameEngineType.MoveGameEngine:
+                    return new MoveGameEngine(configFile);
+                /*    
+                case GameEngineType.AnotherGameEngine:
+                    return new AnotherGameEngine();
+                */
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }
