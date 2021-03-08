@@ -7,14 +7,12 @@ namespace GoD_backend
 {
     public class Program
     {
-        //TODO: change this to some logic or to json settings
-        public static string BACKEND_FOLDER = @"D:\MAO\repos\GoD_backend\src\gameEngine\" ;
         public static void Main(string[] args)
         {
             IGameEngine mge ;
             string filePath ;
 
-            filePath = Path.Combine(BACKEND_FOLDER, "PaperRockScissors.json");
+            filePath = Path.Combine(GameSettings.getGameEngineFolder(), "PaperRockScissors.json");
 
             mge = GameEngineFactory.Create(GameEngineType.MoveGameEngine, filePath);
 

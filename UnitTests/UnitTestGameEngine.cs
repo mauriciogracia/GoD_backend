@@ -8,8 +8,9 @@ namespace UnitTests
     {
         private IGameEngine aGameEngine ;
         private GameEngineType currentGameEngine = GameEngineType.MoveGameEngine;
-        private string jsonRulesFile = Path.Combine(Program.BACKEND_FOLDER,"PaperRockScissors.json");
+        private string jsonRulesFile = Path.Combine(GameSettings.getGameEngineFolder(),"PaperRockScissors.json");
 
+        
         [Fact]
         public void TestGameEngineInit_Fails()
         {
