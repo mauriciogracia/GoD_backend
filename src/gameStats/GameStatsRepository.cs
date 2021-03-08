@@ -30,4 +30,9 @@ public class GameStatsRepository : IStoreGameStats {
     public List<GameStats> GetAll(){
         return  _context.GameStatsItems.ToList<GameStats>() ;
     }
+
+    public void Clear() {
+        _context.GameStatsItems.RemoveRange(_context.GameStatsItems) ;
+        _context.SaveChanges() ;
+    }
 }

@@ -20,7 +20,7 @@ namespace GoD_backend
         public static void WriteLine(string line) {
             string logLine ;
 
-            logLine = string.Format("{0}-{1}",DateTime.Now, line) ;
+            logLine = string.Format("{0}:{1}",DateTime.Now, line) ;
 
             if(logFile != null)
             {

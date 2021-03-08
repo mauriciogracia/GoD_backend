@@ -1,4 +1,0 @@
-3/8/2021 8:50:08 AM-C:\DATA\personal\GoD_backend\src\gameEngine\PaperRockScissors.json
-3/8/2021 8:52:40 AM-C:\DATA\personal\GoD_backend\src\gameEngine\PaperRockScissors.json
-3/8/2021 8:55:35 AM-GameSettings: C:\DATA\personal\GoD_backend\src\gameEngine\PaperRockScissors.json
-3/8/2021 8:55:35 AM-GameEngine has been created
