@@ -45,6 +45,7 @@ namespace GoD_backend
 
             try {
                 lstStats = _context.GameStatsItems.ToList<GameStats>() ;
+                lstStats.Sort((g1,g2) => g2.gamesWon.CompareTo(g1.gamesWon)) ;
             } catch (Exception ex) {
                 CustomLogger.WriteLine(ex.Message) ;
                 lstStats = null ;

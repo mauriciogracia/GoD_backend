@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GoD_backend.Controllers
+namespace GoD_backend.Controllersd
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -34,8 +34,8 @@ namespace GoD_backend.Controllers
             return gameStatsRepo.GetAll();
         }
 
-        [HttpPut]
-        public bool PutGameStats(GameStats gameStats)
+        [HttpPut("UpdateGameStats")]
+        public bool UpdateGameStats([FromBody]GameStats gameStats)
         {
              return gameStatsRepo.Update(gameStats);
         }
