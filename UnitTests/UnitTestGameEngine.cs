@@ -44,40 +44,40 @@ namespace UnitTests
             int moveResult;
             aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
 
-            moveResult = aGameEngine.determinResult("paper", "rock");
+            moveResult = aGameEngine.determineResult("paper", "rock");
             Assert.Equal(1, moveResult);
 
-            moveResult = aGameEngine.determinResult("rock", "scissors");
+            moveResult = aGameEngine.determineResult("rock", "scissors");
             Assert.Equal(1, moveResult);
 
-            moveResult = aGameEngine.determinResult("scissors", "paper");
+            moveResult = aGameEngine.determineResult("scissors", "paper");
             Assert.Equal(1, moveResult);
 
-            moveResult = aGameEngine.determinResult("rock", "paper");
+            moveResult = aGameEngine.determineResult("rock", "paper");
             Assert.Equal(-1, moveResult);
 
-            moveResult = aGameEngine.determinResult("scissors", "rock");
+            moveResult = aGameEngine.determineResult("scissors", "rock");
             Assert.Equal(-1, moveResult);
 
-            moveResult = aGameEngine.determinResult("paper", "scissors");
+            moveResult = aGameEngine.determineResult("paper", "scissors");
             Assert.Equal(-1, moveResult);
 
-            moveResult = aGameEngine.determinResult("paper", "scissors");
+            moveResult = aGameEngine.determineResult("paper", "scissors");
             Assert.Equal(-1, moveResult);
 
-            moveResult = aGameEngine.determinResult("rock", "paper");
+            moveResult = aGameEngine.determineResult("rock", "paper");
             Assert.Equal(-1, moveResult);
 
-            moveResult = aGameEngine.determinResult("scissors", "rock");
+            moveResult = aGameEngine.determineResult("scissors", "rock");
             Assert.Equal(-1, moveResult);
 
-            moveResult = aGameEngine.determinResult("paper", "paper");
+            moveResult = aGameEngine.determineResult("paper", "paper");
             Assert.Equal(0, moveResult);
 
-            moveResult = aGameEngine.determinResult("rock", "rock");
+            moveResult = aGameEngine.determineResult("rock", "rock");
             Assert.Equal(0, moveResult);
 
-            moveResult = aGameEngine.determinResult("scissors", "scissors");
+            moveResult = aGameEngine.determineResult("scissors", "scissors");
             Assert.Equal(0, moveResult);
         }
     }

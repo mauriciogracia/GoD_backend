@@ -51,7 +51,7 @@ namespace GoD_backend
             return ((this.gameSettings != null) && (this.gameSettings.rules != null));
         }
 
-        public int determinResult(String movePlayerOne, String movePlayerTwo) {
+        public int determineResult(String movePlayerOne, String movePlayerTwo) {
             int moveResult ;
 
             //when no matching rule is found a TIE is assumed (i.e. rock vs rock)

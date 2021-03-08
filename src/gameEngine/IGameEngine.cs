@@ -18,13 +18,13 @@ namespace GoD_backend
         /// <summary>
         /// This metod should return
         /// 
-        /// +1 when movePlayerOne beats movePlayerTwo
+        ///  1 when movePlayerOne beats movePlayerTwo
         ///  0 when movePlayerOne ties with movePlayerTwo
         /// -1 when movePlayerOne loses to movePlayerTwo
         /// </summary>
         /// <param name="movePlayerOne">Move made by player one</param>
         /// <param name="movePlayerTwo">Move made by player two</param>
         /// <returns></returns>
-        int determinResult(String movePlayerOne, String movePlayerTwo) ;
+        int determineResult(String movePlayerOne, String movePlayerTwo) ;
     }
 }

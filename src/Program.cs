@@ -7,19 +7,11 @@ namespace GoD_backend
 {
     public class Program
     {
+        public static IGameEngine mge ;
         public static void Main(string[] args)
         {
-            IGameEngine mge ;
-            string filePath ;
-            
             CustomLogger.Init(Path.Combine(Directory.GetCurrentDirectory(), "backendLog.txt")) ;
-
-            filePath = Path.Combine(GameSettings.getGameEngineFolder(), "PaperRockScissors.json");
-            CustomLogger.WriteLine(String.Format("GameSettings: {0}", filePath)) ;
-
-            mge = GameEngineFactory.Create(GameEngineType.MoveGameEngine, filePath);
-            CustomLogger.WriteLine("GameEngine has been created");
-            
+            GameSettings.loadEngine("PaperRockScissors.json") ;
             CreateHostBuilder(args).Build().Run();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
