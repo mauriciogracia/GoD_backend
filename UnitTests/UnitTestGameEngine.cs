@@ -100,6 +100,16 @@ namespace UnitTests
 
             Assert.False(isValid);
         }
+
+        [Fact]
+        public void TestGameEngine_EmptyMove()
+        {
+            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+
+            bool isValid = aGameEngine.isValidMove("   "); 
+
+            Assert.False(isValid);
+        }
     }
 }
 

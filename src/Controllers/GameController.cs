@@ -36,12 +36,20 @@ namespace GoD_backend.Controllersd
         [HttpPost("DetermineResult/{movePlayerOne}/{movePlayerTwo}")]
         public int DetermineResult([FromRoute]string movePlayerOne, [FromRoute]string movePlayerTwo)
         {
+            int resp ;
+
             // Check that the parameters are valid moves 
-
-
+            if((GameSettings.currentGameEngine != null) && GameSettings.currentGameEngine.isValidMove(movePlayerOne) && GameSettings.currentGameEngine.isValidMove(movePlayerTwo))
+            {
+                resp = GameSettings.currentGameEngine.determineResult(movePlayerOne, movePlayerTwo) ;
+                Response.StatusCode = StatusCodes.Status200OK ;
+            }
+            else {
+                resp = -999 ;
+                Response.StatusCode = StatusCodes.Status400BadRequest ;
+            }
             
-            // TODO return FAILUR when parameters dont match expected input
-            return GameSettings.currentGameEngine.determineResult(movePlayerOne, movePlayerTwo) ;
+            return resp ;
         }
 
         [HttpGet("GetGameStats")]
@@ -53,7 +61,18 @@ namespace GoD_backend.Controllersd
         [HttpPut("UpdateGameStats")]
         public bool UpdateGameStats([FromBody]GameStats gameStats)
         {
-             return gameStatsRepo.Update(gameStats);
+            bool updated ;
+
+            updated = gameStatsRepo.Update(gameStats);
+
+            if(updated) {
+                Response.StatusCode = StatusCodes.Status202Accepted ;
+            }
+            else {
+                Response.StatusCode = StatusCodes.Status304NotModified ;
+            }
+
+            return updated ;
         }
     }
 }

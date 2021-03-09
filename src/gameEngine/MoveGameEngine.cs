@@ -47,7 +47,7 @@ namespace GoD_backend
         public bool isValidMove(string move) {
             bool? isValid = gameMoves?.Exists(m => m.ToUpper() == move.Trim().ToUpper()) ;
 
-            return (isValid.HasValue ? isValid.Value : false)  ;
+            return (isValid ?? false)  ;
         }
 
         private bool isValidGameSettingsRules() {
