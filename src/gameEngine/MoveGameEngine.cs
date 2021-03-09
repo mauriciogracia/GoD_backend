@@ -8,13 +8,28 @@ namespace GoD_backend
 {
     public class MoveGameEngine : IGameEngine {
         private GameSettings gameSettings = null;
-
-        
+        private List<String> gameMoves = null ;
         internal MoveGameEngine(String pathToJsonRules){
             try
             {
                 String jsonContent = File.ReadAllText(pathToJsonRules);
                 gameSettings = JsonConvert.DeserializeObject<GameSettings>(jsonContent);
+
+                if (isValidGameSettingsRules())
+                {
+                    gameMoves = new List<string>() ;
+
+                    //Build the possible moves from the rules
+                    foreach (GameRule gameRule in this.gameSettings.rules)
+                    {
+                        if( ! gameMoves.Contains(gameRule.move)) {
+                            gameMoves.Add(gameRule.move);
+                        }
+                        if( ! gameMoves.Contains(gameRule.beats)) {
+                            gameMoves.Add(gameRule.beats);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -23,28 +38,16 @@ namespace GoD_backend
         }
 
         public GameSettings getGameSettings() {
-            return this.gameSettings;
+            return gameSettings;
         }
         public List<String> getPossibleMoves() {
-            List<String> gameMoves ;
-
-            gameMoves = new List<String>();
-
-            if (isValidGameSettingsRules())
-            {
-                //Build the possible moves from the rules
-                foreach (GameRule gameRule in this.gameSettings.rules)
-                {
-                    if( ! gameMoves.Contains(gameRule.move)) {
-                        gameMoves.Add(gameRule.move);
-                    }
-                    if( ! gameMoves.Contains(gameRule.beats)) {
-                        gameMoves.Add(gameRule.beats);
-                    }
-                }
-            }
-
             return gameMoves ;
+        }
+
+        public bool isValidMove(string move) {
+            bool? isValid = gameMoves?.Exists(m => m.ToUpper() == move.Trim().ToUpper()) ;
+
+            return (isValid.HasValue ? isValid.Value : false)  ;
         }
 
         private bool isValidGameSettingsRules() {

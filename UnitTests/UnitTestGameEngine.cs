@@ -80,6 +80,26 @@ namespace UnitTests
             moveResult = aGameEngine.determineResult("scissors", "scissors");
             Assert.Equal(0, moveResult);
         }
+
+        [Fact]
+        public void TestGameEngine_ValidMove()
+        {
+            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+
+            bool isValid = aGameEngine.isValidMove("rOcK"); 
+
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void TestGameEngine_InvalidMove()
+        {
+            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+
+            bool isValid = aGameEngine.isValidMove("ThisIsNot_a_Move"); 
+
+            Assert.False(isValid);
+        }
     }
 }
 

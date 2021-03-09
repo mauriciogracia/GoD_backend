@@ -9,12 +9,14 @@ namespace GoD_backend
         /// </summary>
         /// <returns></returns>
         GameSettings getGameSettings();
+
         /// <summary>
         /// Gets the possible moves from the game engine
         /// </summary>
         /// <returns>A list of posible moves for the game</returns>
         List<String> getPossibleMoves() ;
 
+        bool isValidMove(string move) ;
         /// <summary>
         /// This metod should return
         /// 

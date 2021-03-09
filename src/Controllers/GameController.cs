@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoD_backend.Controllersd
@@ -18,12 +19,27 @@ namespace GoD_backend.Controllersd
         [HttpGet("GetPossibleMoves")]
         public IEnumerable<String> GetPossibleMoves()
         {
-            return GameSettings.currentGameEngine.getPossibleMoves();
+            List<String> allMoves ;
+
+            if(GameSettings.currentGameEngine != null) {
+                allMoves = GameSettings.currentGameEngine.getPossibleMoves() ;
+                Response.StatusCode = StatusCodes.Status200OK ;
+            }
+            else {
+                allMoves = null ;
+                Response.StatusCode = StatusCodes.Status204NoContent ;
+            }
+           
+            return allMoves;
         }
 
         [HttpPost("DetermineResult/{movePlayerOne}/{movePlayerTwo}")]
         public int DetermineResult([FromRoute]string movePlayerOne, [FromRoute]string movePlayerTwo)
         {
+            // Check that the parameters are valid moves 
+
+
+            
             // TODO return FAILUR when parameters dont match expected input
             return GameSettings.currentGameEngine.determineResult(movePlayerOne, movePlayerTwo) ;
         }
