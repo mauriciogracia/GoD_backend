@@ -66,10 +66,10 @@ namespace GoD_backend.Controllersd
             updated = gameStatsRepo.Update(gameStats);
 
             if(updated) {
-                Response.StatusCode = StatusCodes.Status202Accepted ;
+                Response.StatusCode = StatusCodes.Status200OK ;
             }
             else {
-                Response.StatusCode = StatusCodes.Status304NotModified ;
+                Response.StatusCode = StatusCodes.Status400BadRequest ;
             }
 
             return updated ;
