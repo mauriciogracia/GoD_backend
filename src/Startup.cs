@@ -22,29 +22,9 @@ namespace GoD_backend
         {
             services.AddDbContext<GameStatsContext>(opt => opt.UseInMemoryDatabase("GameStatsDB"));
 
-            /* attempt 1
-            services.AddCors(options =>
-                    {
-                        options.AddDefaultPolicy(
-                            builder =>
-                            {
-                                //builder.WithOrigins("http://example.com", "http://www.contoso.com");
-                                //This is done this way to facilitate connecting frontend and backend
-                                //but this should be changed to enforce certain origins or methods
-                                builder.AllowAnyOrigin(). ;
-                            });
-                    });
-            */
-
-            /* attempt 2 
-            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
-            {
-                builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
-            }));
-            */
-
             services.AddCors(c =>  
             {  
+                //This is only for development environments, it should be changed for Production
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
             });  
 
@@ -54,6 +34,9 @@ namespace GoD_backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //UseCors has to be at the top in order to work - contrary to what the official documentation says
+            app.UseCors(options => options.AllowAnyOrigin());  
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -62,8 +45,6 @@ namespace GoD_backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            //app.UseCors("ApiCorsPolicy");
-            app.UseCors(options => options.AllowAnyOrigin());  
                     
             app.UseAuthorization();
 
