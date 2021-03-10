@@ -22,6 +22,32 @@ namespace GoD_backend
         {
             services.AddDbContext<GameStatsContext>(opt => opt.UseInMemoryDatabase("GameStatsDB"));
 
+            /* attempt 1
+            services.AddCors(options =>
+                    {
+                        options.AddDefaultPolicy(
+                            builder =>
+                            {
+                                //builder.WithOrigins("http://example.com", "http://www.contoso.com");
+                                //This is done this way to facilitate connecting frontend and backend
+                                //but this should be changed to enforce certain origins or methods
+                                builder.AllowAnyOrigin(). ;
+                            });
+                    });
+            */
+
+            /* attempt 2 
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+            }));
+            */
+
+            services.AddCors(c =>  
+            {  
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
+            });  
+
             services.AddControllers();
         }
 
@@ -36,8 +62,10 @@ namespace GoD_backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            //app.UseAuthorization();
+            //app.UseCors("ApiCorsPolicy");
+            app.UseCors(options => options.AllowAnyOrigin());  
+                    
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
