@@ -1,5 +1,4 @@
 # GoD_backend
- - Backend
 
 The backend of **Game of Drones** was developed using .NET CORE version 5.0.200. If you have a .NET core SDK or Runtime compatible with that version you should be able to compile it from the source code or run it from the buil. 
 
