@@ -41,6 +41,9 @@ namespace GoD_backend
             return gameSettings;
         }
         public List<String> getPossibleMoves() {
+            CustomLogger.WriteLine("gameMoves:") ;
+            gameMoves.ForEach(i => CustomLogger.WriteLine(i));
+
             return gameMoves ;
         }
 

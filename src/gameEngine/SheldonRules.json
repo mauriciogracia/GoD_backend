@@ -1,0 +1,47 @@
+{
+    "rules": [
+      {
+        "move":"scissors",
+        "beats":"paper"
+      },
+      {
+        "move":"paper",
+        "beats":"rock"
+      },
+      {
+        "move":"lizard",
+        "beats":"Spock"
+      },
+	  {
+        "move":"rock",
+        "beats":"lizard"
+      },
+	  {
+        "move":"Spock",
+        "beats":"scissors"
+      },
+	  {
+        "move":"scissors",
+        "beats":"lizard"
+      },
+	  {
+        "move":"lizard",
+        "beats":"paper"
+      },
+	  {
+        "move":"paper",
+        "beats":"Spock"
+      },
+	  {
+        "move":"Spock",
+        "beats":"rock"
+      },
+	  {
+        "move":"rock",
+        "beats":"scissors"
+      },
+    ]
+  }
+  
+  
+  
