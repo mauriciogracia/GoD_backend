@@ -8,3 +8,9 @@ There are two main folders
    
 
 Steps to Deploy and configure
+
+Deploy requieres docker to be installed.
+
+1. Go to the GoD_backend folder and run the command `$docker build .`
+2. Then you need to run the docker container `docker run -d -p 5000:5000 --name GoD GoD_backend`
+3. Now you can Deploy the front end https://github.com/mauriciogracia/GoD_frontend
