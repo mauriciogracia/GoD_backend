@@ -5,7 +5,13 @@ The backend of **Game of Drones** was developed using .NET CORE version 5.0.200
 There are two main folders
    - src - contains the source code of the aplication
    - UniTesting - contains the tests that were creted to test the functionality
-   
+
+
+This backend supports configurable gameEngine rules they are in the folder `gameEngine` and two files exist there:
+ - PaperRockScissors.json
+ - SheldonRules.json
+ 
+The default one is SheldonRules.json, if you modify any of the rules in the file you need to restart this backend
 
 # Deploy Process
 
