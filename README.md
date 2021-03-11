@@ -7,7 +7,7 @@ There are two main folders
    - UniTesting - contains the tests that were creted to test the functionality
    
 
-Steps to Deploy and configure
+# Deploy Process
 
 Deploy requieres docker to be installed.
 
