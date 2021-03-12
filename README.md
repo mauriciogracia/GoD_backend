@@ -17,6 +17,6 @@ The default one is SheldonRules.json, if you modify any of the rules in the file
 
 Deploy requieres docker to be installed.
 
-1. Go to the GoD_backend folder and run the command `$docker build .`
-2. Then you need to run the docker container `docker run -d -p 5000:5000 --name GoD app`
+1. Go to the `GoD_backend` folder and run the command `docker build . -t god_backend`
+2. Then you need to run the docker container `docker run -d -p 5000:5000 god_backend`
 3. Now you can Deploy the front end https://github.com/mauriciogracia/GoD_frontend
