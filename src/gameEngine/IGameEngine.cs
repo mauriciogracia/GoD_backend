@@ -11,6 +11,12 @@ namespace GoD_backend
         GameSettings getGameSettings();
 
         /// <summary>
+        /// Sets current gameSettings of the game
+        /// </summary>
+        /// <returns></returns>
+        void setGameSettings(GameSettings value);
+
+        /// <summary>
         /// Gets the possible moves from the game engine
         /// </summary>
         /// <returns>A list of posible moves for the game</returns>

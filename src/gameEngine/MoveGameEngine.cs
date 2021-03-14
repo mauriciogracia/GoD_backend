@@ -8,47 +8,25 @@ namespace GoD_backend
 {
     public class MoveGameEngine : IGameEngine {
         private GameSettings gameSettings = null;
-        private List<String> gameMoves = null ;
-        internal MoveGameEngine(String pathToJsonRules){
-            try
-            {
-                String jsonContent = File.ReadAllText(pathToJsonRules);
-                gameSettings = JsonConvert.DeserializeObject<GameSettings>(jsonContent);
+        public MoveGameEngine(){
 
-                if (isValidGameSettingsRules())
-                {
-                    gameMoves = new List<string>() ;
-
-                    //Build the possible moves from the rules
-                    foreach (GameRule gameRule in this.gameSettings.rules)
-                    {
-                        if( ! gameMoves.Contains(gameRule.move)) {
-                            gameMoves.Add(gameRule.move);
-                        }
-                        if( ! gameMoves.Contains(gameRule.beats)) {
-                            gameMoves.Add(gameRule.beats);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
-
         public GameSettings getGameSettings() {
             return gameSettings;
         }
+
+        public void setGameSettings(GameSettings gs) {
+            this.gameSettings = gs;
+        }
         public List<String> getPossibleMoves() {
             CustomLogger.WriteLine("gameMoves:") ;
-            gameMoves.ForEach(i => CustomLogger.WriteLine(i));
+            this.gameSettings.moves.ForEach(i => CustomLogger.WriteLine(i));
 
-            return gameMoves ;
+            return this.gameSettings.moves ;
         }
 
         public bool isValidMove(string move) {
-            bool? isValid = gameMoves?.Exists(m => m.ToUpper() == move.Trim().ToUpper()) ;
+            bool? isValid = this.gameSettings.moves?.Exists(m => m.ToUpper() == move.Trim().ToUpper()) ;
 
             return (isValid ?? false)  ;
         }

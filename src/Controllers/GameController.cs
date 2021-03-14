@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GoD_backend.Controllersd
+namespace GoD_backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class GameController : ControllerBase
     {
-        private readonly GameStatsRepository gameStatsRepo ;
+        IGameEngine _aGameEngine ;
 
-        public GameController(GameStatsContext context)
+        public GameController(IGameEngine aGameEngine)
         {
-            gameStatsRepo = new GameStatsRepository(context);
+            RuleLoader rl ;
+
+            _aGameEngine = aGameEngine ;
+            rl = new RuleLoader("SheldonRules.json") ;
+            _aGameEngine.setGameSettings(rl.gr) ;
         }
 
         [HttpGet("GetPossibleMoves")]
@@ -21,14 +25,8 @@ namespace GoD_backend.Controllersd
         {
             List<String> allMoves ;
 
-            if(GameSettings.currentGameEngine != null) {
-                allMoves = GameSettings.currentGameEngine.getPossibleMoves() ;
-                Response.StatusCode = StatusCodes.Status200OK ;
-            }
-            else {
-                allMoves = null ;
-                Response.StatusCode = StatusCodes.Status204NoContent ;
-            }
+            allMoves = _aGameEngine.getPossibleMoves() ;
+            Response.StatusCode = StatusCodes.Status200OK ;
            
             return allMoves;
         }
@@ -39,9 +37,9 @@ namespace GoD_backend.Controllersd
             int resp ;
 
             // Check that the parameters are valid moves 
-            if((GameSettings.currentGameEngine != null) && GameSettings.currentGameEngine.isValidMove(movePlayerOne) && GameSettings.currentGameEngine.isValidMove(movePlayerTwo))
+            if((_aGameEngine != null) && _aGameEngine.isValidMove(movePlayerOne) && _aGameEngine.isValidMove(movePlayerTwo))
             {
-                resp = GameSettings.currentGameEngine.determineResult(movePlayerOne, movePlayerTwo) ;
+                resp = _aGameEngine.determineResult(movePlayerOne, movePlayerTwo) ;
                 Response.StatusCode = StatusCodes.Status200OK ;
             }
             else {
@@ -50,29 +48,6 @@ namespace GoD_backend.Controllersd
             }
             
             return resp ;
-        }
-
-        [HttpGet("GetGameStats")]
-        public IEnumerable<GameStats> GetGameStats()
-        {
-            return gameStatsRepo.GetAll();
-        }
-
-        [HttpPut("UpdateGameStats")]
-        public bool UpdateGameStats([FromBody]GameStats gameStats)
-        {
-            bool updated ;
-
-            updated = gameStatsRepo.Update(gameStats);
-
-            if(updated) {
-                Response.StatusCode = StatusCodes.Status200OK ;
-            }
-            else {
-                Response.StatusCode = StatusCodes.Status400BadRequest ;
-            }
-
-            return updated ;
         }
     }
 }

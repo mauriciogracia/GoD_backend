@@ -21,7 +21,8 @@ namespace GoD_backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<GameStatsContext>(opt => opt.UseInMemoryDatabase("GameStatsDB"));
-
+            services.AddScoped<IGameEngine, MoveGameEngine>();
+            services.AddScoped<IStoreGameStats, GameStatsRepository>();
             services.AddCors(c =>  
             {  
                 //This is only for development environments, it should be changed for Production
