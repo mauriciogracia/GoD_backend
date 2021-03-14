@@ -8,9 +8,15 @@ namespace GoD_backend
 {
     public class MoveGameEngine : IGameEngine {
         private GameSettings gameSettings = null;
-        public MoveGameEngine(){
 
+        private ILog _logger ;
+
+        public MoveGameEngine(){
         }
+        public void setLogger(ILog logger){
+            _logger = logger ;
+        }
+
         public GameSettings getGameSettings() {
             return gameSettings;
         }
@@ -19,8 +25,8 @@ namespace GoD_backend
             this.gameSettings = gs;
         }
         public List<String> getPossibleMoves() {
-            CustomLogger.WriteLine("gameMoves:") ;
-            this.gameSettings.moves.ForEach(i => CustomLogger.WriteLine(i));
+            _logger.WriteLine("gameMoves:") ;
+            this.gameSettings.moves.ForEach(i => _logger.WriteLine(i));
 
             return this.gameSettings.moves ;
         }

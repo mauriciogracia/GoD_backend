@@ -35,16 +35,16 @@ namespace GoD_backend
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                CustomLogger.WriteLine(ex.Message);
+                //_logger.WriteLine(ex.Message);
             }
         }
         private bool isValidGameSettingsRules() {
             return ((gr != null) && (gr.rules != null));
         }
         
-        public static string getGameEngineFolder() {
+        public string getGameEngineFolder() {
             const string rootFolder = "GoD_backend\\" ;
             string folder ;
 

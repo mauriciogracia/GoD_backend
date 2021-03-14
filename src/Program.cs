@@ -7,10 +7,8 @@ namespace GoD_backend
 {
     public class Program
     {
-        public static IGameEngine mge ;
         public static void Main(string[] args)
         {
-            CustomLogger.Init(Path.Combine(Directory.GetCurrentDirectory(), "backendLog.txt")) ;
             CreateHostBuilder(args).Build().Run();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>

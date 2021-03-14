@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GoD_backend;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Xunit;
 
 
@@ -14,7 +13,10 @@ public class UnitTestGameStats {
 
         gameCtx = new GameStatsContext(dbOptions) ;
 
-        repo = new GameStatsRepository(gameCtx) ;
+        var fl = new FileLogger() ;
+        fl.Init("uniTests.txt") ;
+
+        repo = new GameStatsRepository(gameCtx,fl) ;
         repo.Clear() ;
 
         return repo ;

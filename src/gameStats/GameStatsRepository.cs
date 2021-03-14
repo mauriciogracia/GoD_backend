@@ -7,10 +7,12 @@ namespace GoD_backend
 {
     public class GameStatsRepository : IStoreGameStats {
         private readonly GameStatsContext _context;
+        private readonly ILog _logger;
 
-        public GameStatsRepository(GameStatsContext context)
+        public GameStatsRepository(GameStatsContext context, ILog logger)
         {
             _context = context;
+            _logger = logger; 
         }
 
         public bool Update(GameStats gameStats){
@@ -33,7 +35,7 @@ namespace GoD_backend
                 success = true ;
             }
             catch (Exception ex) {
-                CustomLogger.WriteLine(ex.Message) ;
+                _logger.WriteLine(ex.Message) ;
                 success = false ;
             }
 
@@ -47,7 +49,7 @@ namespace GoD_backend
                 lstStats = _context.GameStatsItems.ToList<GameStats>() ;
                 lstStats.Sort((g1,g2) => g2.gamesWon.CompareTo(g1.gamesWon)) ;
             } catch (Exception ex) {
-                CustomLogger.WriteLine(ex.Message) ;
+                _logger.WriteLine(ex.Message) ;
                 lstStats = null ;
             }
 
@@ -62,7 +64,7 @@ namespace GoD_backend
                 _context.SaveChanges() ;
                 success = true ;
             } catch (Exception ex) {
-                CustomLogger.WriteLine(ex.Message) ;
+                _logger.WriteLine(ex.Message) ;
                 success = false ;
             }
 

@@ -6,15 +6,27 @@ namespace UnitTests
 {
     public class UnitTestGameEngine
     {
-        private IGameEngine aGameEngine ;
-        private GameEngineType currentGameEngine = GameEngineType.MoveGameEngine;
-        private string jsonRulesFile = Path.Combine(GameSettings.getGameEngineFolder(),"PaperRockScissors.json");
+        private IGameEngine aGameEngine = null ;
 
+        private void initEngine(string fileName) {
+            RuleLoader rl ;
         
+            if(aGameEngine == null) {
+                var fl = new FileLogger() ;
+                fl.Init("uniTests.txt") ;
+
+                aGameEngine = new MoveGameEngine() ;
+                aGameEngine.setLogger(fl) ;
+
+                rl = new RuleLoader(fileName) ;
+                aGameEngine.setGameSettings(rl.gr) ;
+            }
+        }
+
         [Fact]
         public void TestGameEngineInit_Fails()
         {
-            aGameEngine = GameEngineFactory.Create(currentGameEngine,"INCORRECT_FILE.json");
+            initEngine("INCORRECT_FILE.json") ;
             var gs = aGameEngine.getGameSettings();
 
             Assert.True((gs == null) || (gs.rules == null));
@@ -23,7 +35,7 @@ namespace UnitTests
         [Fact]
         public void TestGameEngineInit_Success()
         {
-            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+            initEngine("SheldonRules.json") ;
             var gs = aGameEngine.getGameSettings();
 
             Assert.True((gs != null) && (gs.rules != null));              
@@ -32,7 +44,7 @@ namespace UnitTests
         [Fact]
         public void TestGameEngine_GetPossibleMoves()
         {
-            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+            initEngine("SheldonRules.json") ;
             var lstMoves = aGameEngine.getPossibleMoves();
 
             Assert.NotNull(lstMoves);
@@ -42,7 +54,8 @@ namespace UnitTests
         public void TestGameEngine_Rules()
         {
             int moveResult;
-            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+            
+            initEngine("SheldonRules.json") ;
 
             moveResult = aGameEngine.determineResult("paper", "rock");
             Assert.Equal(1, moveResult);
@@ -84,7 +97,7 @@ namespace UnitTests
         [Fact]
         public void TestGameEngine_ValidMove()
         {
-            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+            initEngine("SheldonRules.json") ;
 
             bool isValid = aGameEngine.isValidMove("rOcK"); 
 
@@ -94,7 +107,7 @@ namespace UnitTests
         [Fact]
         public void TestGameEngine_InvalidMove()
         {
-            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+            initEngine("SheldonRules.json") ;
 
             bool isValid = aGameEngine.isValidMove("ThisIsNot_a_Move"); 
 
@@ -104,7 +117,7 @@ namespace UnitTests
         [Fact]
         public void TestGameEngine_EmptyMove()
         {
-            aGameEngine = GameEngineFactory.Create(currentGameEngine, jsonRulesFile);
+            initEngine("SheldonRules.json") ;
 
             bool isValid = aGameEngine.isValidMove("   "); 
 
