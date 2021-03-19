@@ -4,7 +4,6 @@ using System.Collections.Generic;
 namespace GoD_backend
 {
     public interface IGameEngine {
-        void setLogger(ILog logger) ;
         /// <summary>
         /// Returns the current gameSettings of the game
         /// </summary>

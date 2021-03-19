@@ -16,7 +16,6 @@ namespace UnitTests
                 fl.Init("uniTests.txt") ;
 
                 aGameEngine = new MoveGameEngine() ;
-                aGameEngine.setLogger(fl) ;
 
                 rl = new RuleLoader(fileName) ;
                 aGameEngine.setGameSettings(rl.gr) ;
@@ -47,7 +46,7 @@ namespace UnitTests
             initEngine("SheldonRules.json") ;
             var lstMoves = aGameEngine.getPossibleMoves();
 
-            Assert.NotNull(lstMoves);
+            Assert.True((lstMoves != null) && (lstMoves.Count >0)) ;
         }
 
         [Fact]
